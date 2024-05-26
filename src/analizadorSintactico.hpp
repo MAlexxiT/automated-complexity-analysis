@@ -143,7 +143,7 @@ union YYSTYPE
     cl_lista_argumentos *lista_argumentos; 
     cl_argumentos_llamada *argumentos_llamada;
     int es_exponencial;
-    //Si mal no recuerdo, tipos de datos no primitivos tienen que ser apuntadores, deal with it
+    //Tipos de datos no primitivos tienen que ser apuntadores, deal with it
     vector<cl_declaracion_funcion*>* funciones_declaradas;
     //1,2,3
     int es_conector;

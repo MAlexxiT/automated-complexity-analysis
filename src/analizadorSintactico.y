@@ -1,5 +1,5 @@
 %{
-#include "nodos.h"
+#include "nodos.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <string>
@@ -9,7 +9,7 @@
 
 cl_raiz* raiz;
 extern int yylex();
-void yyerror(const char *s) { printf("ERROR, FIX THIS SOMEHOW LOOOOL: %s \n", s); }
+void yyerror(const char *s) { printf("ERROR: %s \n", s); }
 
 %}
 %union {
@@ -25,7 +25,7 @@ void yyerror(const char *s) { printf("ERROR, FIX THIS SOMEHOW LOOOOL: %s \n", s)
     cl_lista_argumentos *lista_argumentos; 
     cl_argumentos_llamada *argumentos_llamada;
     int es_exponencial;
-    //Si mal no recuerdo, tipos de datos no primitivos tienen que ser apuntadores, deal with it
+    //Tipos de datos no primitivos tienen que ser apuntadores, deal with it
     vector<cl_declaracion_funcion*>* funciones_declaradas;
     //1,2,3
     int es_conector;
@@ -43,7 +43,6 @@ void yyerror(const char *s) { printf("ERROR, FIX THIS SOMEHOW LOOOOL: %s \n", s)
 %token<nada> t_bitand t_bitxor t_colon t_comma t_dot t_opcrlyb t_clocrlyb
 
 %token<atributos> t_include t_hardstr t_charconst t_identificador t_intconst t_doubleconst
-/*%type<double_val> expression ;*/
 /*-----------CABECERA-------------*/
 %type<nada> cabecera cabeceras
 %type<funciones_declaradas> declaracionesFuncion
@@ -260,7 +259,7 @@ void yyerror(const char *s) { printf("ERROR, FIX THIS SOMEHOW LOOOOL: %s \n", s)
             $$->identificador = $1->value_string; 
         }
         |expresionAritmetica t_sumsum {
-            //beginning of id related rules
+            //beginning of identifier related rules
             $$= new cl_expresion_aritmetica;
             $$->es_terminal = false;
             $$->izquierda = $1;
@@ -346,7 +345,6 @@ void yyerror(const char *s) { printf("ERROR, FIX THIS SOMEHOW LOOOOL: %s \n", s)
                 $$->identificador = $2->izquierda->identificador;
                 $$->inicializada = true;
                 $$->valor_predeterminado = $2->derecha;
-                //#cout<<"AAAAAA"<<$$->identificador<<endl;
             }
         }
         |tipoContenedor expresionAritmetica{
@@ -354,7 +352,6 @@ void yyerror(const char *s) { printf("ERROR, FIX THIS SOMEHOW LOOOOL: %s \n", s)
             $$ = new cl_declaracion;
             $$->tipo = $1;
             $$->identificador = $2->identificador;
-            //cout<<"CONTENEDOR "<<$$->tipo->tipo<<" "<<$$->identificador<<endl; 
         }
     ;
     /*----------EXPRESIONES BOOLEANAS-------------*/
@@ -366,7 +363,6 @@ void yyerror(const char *s) { printf("ERROR, FIX THIS SOMEHOW LOOOOL: %s \n", s)
         |t_lt   {$$=-1;}
         |t_gt   {$$=1;}
     ;
-    /*AGREGAR AL MODULO DE ANALISIS ALGO PARA IDENTIFICAR EXPRESIONES BOOLEANAS CONFORMADAS POR SOLO UNA EXPRESION ARITMETICA*/
     expresionBooleana:
         expresionAritmetica operadorBooleano expresionAritmetica{
             $$ = new cl_expresion_booleana;
@@ -460,8 +456,6 @@ void yyerror(const char *s) { printf("ERROR, FIX THIS SOMEHOW LOOOOL: %s \n", s)
         }
     ;
     /*-----------BLOQUE DE INSTRUCCIONES-----------*/
-    /*PUEDE QUE EXPRESION SE VUELVA EL NUEVO CONTENEDOR DE TODAS LAS EXPRESIONES BOOLEANAS, VERIFICAR QUE NO PASE*/
-    /*ESTOY SEGURO QUE LA PARTE DE BLOQUE DE INSTRUCCIONES ES LA FUENTE DE MIS SHIFT-REDUCE CONFLICTS */
     instruccion:
         expresionAritmetica t_semicolon { 
             $$ = new cl_bloque_codigo;
@@ -482,7 +476,6 @@ void yyerror(const char *s) { printf("ERROR, FIX THIS SOMEHOW LOOOOL: %s \n", s)
             $$ = new cl_bloque_codigo;
             $$->declaraciones.push_back($1);
             $$->expresion_return = NULL;
-            //cout<<$1->identificador<<"---->"<<$1->tipo->tipo<<endl;
         }
         | t_return expresionAritmetica t_semicolon {
             $$ = new cl_bloque_codigo;
@@ -590,24 +583,3 @@ void yyerror(const char *s) { printf("ERROR, FIX THIS SOMEHOW LOOOOL: %s \n", s)
     }
     ;
 %%
-/*
-[DONE]CHECAR SI LOS TOKENS GTEQ SON GENERADOS 
-AGREGAR CONTENEDORES DE CONTENEDORES
-AGREGAR LA CAPACIDAD DE CREAR CONSTANTES
-AGREGAR MAPAS CON KEY,VALUE DE CONTENEDORES
-[DONE]AGREGAR LA CAPACIDAD DE CREAR DECLASIGNACIONES
-[CUESTIONABLE]CREAR CUSTOM CLASS PARA DECLASIGNACION
-AGREGAR CAPACIDAD DE TOMAR VARIABLES GLOBALES
-[CUESTIONABLE]CAMBIAR LO DE LINE_NUMBER A $$->line_number = @1;
-AGREGAR ASIGNACION DEL TIPO int a,b,c,d;
-SOPORTAR MEZCLAS ENTRE EXPRESIONES ARITMETICAS Y BOOLEANAS
-[DONE]AGREGAR LA POSIBILIDAD DE QUE LLAMADAS A FUNCIONES SEAN PARTE DE EXPRESIONES
-QUITAR LA POSIBLIDAD DE TRATAR UNA CONSTANTE NUMERICA COMO VARIABLE EN EXPRESION, HACER MEDIANTE LA CREACIOB DE UNA NUEVA REGLA, CUIDAR LA AMBIGUEDAD PARA ESOS CASOS
-[DONE]LA IMPLEMENTACION ACTUAL DE ELSE PERMITE COSAS COMO IF(EXPR){}ELSE{}ELSE{}...ELSE{} CORREGIR
-AGREGAR LA POSIBILIDAD DE DEJAR ARGUMENTOS DE FOR EN BLANCO DENTRO DE LA GRAMATICA
-[DONE]VER COMO IMPLEMENTAR EARLY BREAKS EN IF/ELSE DENTRO DE CICLOS, POSIBLEMENTE AGREGAR SU CONDICION COMO UN ARGUMENTO DE TERMINACION OF SOME SORT
-[DONE]LA DESCRIPCION ACTUAL DE ARGUMENTOS DE CINCOUT PERMITE COSAS COMO COUT; CORREGIR SOMEHOW
-[DONE]AGREGAR LOS OPERADORES ++ Y -- LOL
-[DONE] AGREGAR LA CAPACIDAD DE CREAR BLOQUES DE CODIGO VACIOS
-[DONE] AGREGAR CAPACIDAD DE TENER ARREGLOS MULTIDIMENSIONALES
-*/

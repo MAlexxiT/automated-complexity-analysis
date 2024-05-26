@@ -629,11 +629,10 @@ char *yytext;
 #include <iostream>
 #include <cstdlib>
 #include <string>
-#include "nodos.h"
-#include "analizadorSintactico.hpp" // output of bison on example1 .y
+#include "nodos.hpp"
+#include "analizadorSintactico.hpp" 
 extern "C" int yywrap() { }
-//por si algun dia requiero volver a poner globales lol
-#line 637 "analizadorLexico.cpp"
+#line 636 "analizadorLexico.cpp"
 /*HARDCODED STUFF*/
 /*tipos de datos primitivos + struct + pair*/
 /*contenedores STL*/
@@ -642,7 +641,7 @@ extern "C" int yywrap() { }
 /* TRUE/FALSE , I/O , flow Control*/
 /*operadores de bits + ternario*/
 /*CARACTERES CONSTRUCTORES*/
-#line 646 "analizadorLexico.cpp"
+#line 645 "analizadorLexico.cpp"
 
 #define INITIAL 0
 
@@ -859,9 +858,9 @@ YY_DECL
 		}
 
 	{
-#line 84 "analizadorLexico.l"
+#line 83 "analizadorLexico.l"
 
-#line 865 "analizadorLexico.cpp"
+#line 864 "analizadorLexico.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -921,29 +920,29 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 85 "analizadorLexico.l"
+#line 84 "analizadorLexico.l"
 {}/* eat up whitespace */  
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 86 "analizadorLexico.l"
+#line 85 "analizadorLexico.l"
 {}  
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 87 "analizadorLexico.l"
+#line 86 "analizadorLexico.l"
 {}/* COMENTARIOS DE UNA SOLA LINEA */
 	YY_BREAK
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 88 "analizadorLexico.l"
+#line 87 "analizadorLexico.l"
 {} /*COMENTARIOS DE UNA SOLA LINEA*/
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 89 "analizadorLexico.l"
+#line 88 "analizadorLexico.l"
 {
     yylval.atributos = new cl_atributos_tokens;
 
@@ -952,69 +951,68 @@ YY_RULE_SETUP
         if(yytext[i]=='\n') break;
         yylval.atributos->value_string+=yytext[i];
     }
-    //#cout<<"t_include"<<endl;
     return t_include;    
 }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 100 "analizadorLexico.l"
+#line 98 "analizadorLexico.l"
 {
     return t_nspacestd;
 }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 103 "analizadorLexico.l"
+#line 101 "analizadorLexico.l"
 {
     return t_define;
 }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 106 "analizadorLexico.l"
+#line 104 "analizadorLexico.l"
 {
     return t_new;
 }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 109 "analizadorLexico.l"
+#line 107 "analizadorLexico.l"
 {
     return t_opregb;
 }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 112 "analizadorLexico.l"
+#line 110 "analizadorLexico.l"
 {
     return t_cloregb;
 }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 115 "analizadorLexico.l"
+#line 113 "analizadorLexico.l"
 {
     return t_return;
 }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 118 "analizadorLexico.l"
+#line 116 "analizadorLexico.l"
 {
     return t_cout;
 }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 121 "analizadorLexico.l"
+#line 119 "analizadorLexico.l"
 {
     return t_cin;
 }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 124 "analizadorLexico.l"
+#line 122 "analizadorLexico.l"
 {
     return t_endl;
 }
@@ -1022,7 +1020,7 @@ YY_RULE_SETUP
 case 15:
 /* rule 15 can match eol */
 YY_RULE_SETUP
-#line 127 "analizadorLexico.l"
+#line 125 "analizadorLexico.l"
 {
     yylval.atributos = new cl_atributos_tokens;
 
@@ -1036,211 +1034,210 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 137 "analizadorLexico.l"
+#line 135 "analizadorLexico.l"
 {
     return t_bool;
 }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 140 "analizadorLexico.l"
+#line 138 "analizadorLexico.l"
 {
     return t_void;
 }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 143 "analizadorLexico.l"
+#line 141 "analizadorLexico.l"
 {
     return t_long;
 }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 146 "analizadorLexico.l"
+#line 144 "analizadorLexico.l"
 {
     return t_short;
 }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 149 "analizadorLexico.l"
+#line 147 "analizadorLexico.l"
 {
     return t_int;
 }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 152 "analizadorLexico.l"
+#line 150 "analizadorLexico.l"
 {
     return t_char;
 }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 155 "analizadorLexico.l"
+#line 153 "analizadorLexico.l"
 {printf("T_FLOAT\n");
     return t_float;
 }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 158 "analizadorLexico.l"
+#line 156 "analizadorLexico.l"
 {
     return t_double;
 }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 161 "analizadorLexico.l"
+#line 159 "analizadorLexico.l"
 {
     return t_struct;
 }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 164 "analizadorLexico.l"
+#line 162 "analizadorLexico.l"
 {
     return t_string;
 }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 167 "analizadorLexico.l"
+#line 165 "analizadorLexico.l"
 {
     return t_vector;
 }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 170 "analizadorLexico.l"
+#line 168 "analizadorLexico.l"
 {
     return t_map;
 }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 173 "analizadorLexico.l"
+#line 171 "analizadorLexico.l"
 {
     return t_umap;
 }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 176 "analizadorLexico.l"
+#line 174 "analizadorLexico.l"
 {
-    //#std::cout<<"t_set"<<endl;
     return t_set;
 }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 180 "analizadorLexico.l"
+#line 177 "analizadorLexico.l"
 {
     return t_multiset;
 }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 183 "analizadorLexico.l"
+#line 180 "analizadorLexico.l"
 {
     return t_queue;
 }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 186 "analizadorLexico.l"
+#line 183 "analizadorLexico.l"
 {
     return t_pqueue;
 }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 189 "analizadorLexico.l"
+#line 186 "analizadorLexico.l"
 {
     return t_stack;
 }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 192 "analizadorLexico.l"
+#line 189 "analizadorLexico.l"
 {
     return t_bitset;
 }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 195 "analizadorLexico.l"
+#line 192 "analizadorLexico.l"
 {
     return t_pair;
 }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 198 "analizadorLexico.l"
+#line 195 "analizadorLexico.l"
 {
     return t_if;
 }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 201 "analizadorLexico.l"
+#line 198 "analizadorLexico.l"
 {
     return t_else;
 }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 204 "analizadorLexico.l"
+#line 201 "analizadorLexico.l"
 {
     return t_while;
 }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 207 "analizadorLexico.l"
+#line 204 "analizadorLexico.l"
 {
     return t_for;
 }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 210 "analizadorLexico.l"
+#line 207 "analizadorLexico.l"
 {
     return t_do;
 }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 213 "analizadorLexico.l"
+#line 210 "analizadorLexico.l"
 {
     return t_true;
 }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 216 "analizadorLexico.l"
+#line 213 "analizadorLexico.l"
 {
     return t_false;
 }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 219 "analizadorLexico.l"
+#line 216 "analizadorLexico.l"
 {
     return t_continue;
 }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 222 "analizadorLexico.l"
+#line 219 "analizadorLexico.l"
 {
     return t_break;
 }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 225 "analizadorLexico.l"
+#line 222 "analizadorLexico.l"
 {
     yylval.atributos = new cl_atributos_tokens;
 
@@ -1253,14 +1250,14 @@ YY_RULE_SETUP
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 234 "analizadorLexico.l"
+#line 231 "analizadorLexico.l"
 {
     return t_opsqrb;
 }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 237 "analizadorLexico.l"
+#line 234 "analizadorLexico.l"
 {
     yylval.atributos = new cl_atributos_tokens;
 
@@ -1275,14 +1272,14 @@ YY_RULE_SETUP
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 248 "analizadorLexico.l"
+#line 245 "analizadorLexico.l"
 {
     return t_closqrb;
 }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 251 "analizadorLexico.l"
+#line 248 "analizadorLexico.l"
 {
     yylval.atributos = new cl_atributos_tokens;
 
@@ -1297,35 +1294,35 @@ YY_RULE_SETUP
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 262 "analizadorLexico.l"
+#line 259 "analizadorLexico.l"
 {    
     return t_eqeq;
 }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 265 "analizadorLexico.l"
+#line 262 "analizadorLexico.l"
 {
     return t_nteq;
 }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 268 "analizadorLexico.l"
+#line 265 "analizadorLexico.l"
 {
     return t_eq;
 }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 271 "analizadorLexico.l"
+#line 268 "analizadorLexico.l"
 {
     return t_semicolon;
 }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 274 "analizadorLexico.l"
+#line 271 "analizadorLexico.l"
 {
     yylval.atributos = new cl_atributos_tokens;
     yylval.atributos->value_char = yytext[1];
@@ -1334,171 +1331,171 @@ YY_RULE_SETUP
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 279 "analizadorLexico.l"
+#line 276 "analizadorLexico.l"
 {
     return t_lteq;
 }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 282 "analizadorLexico.l"
+#line 279 "analizadorLexico.l"
 {
     return t_gteq;
 }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 285 "analizadorLexico.l"
+#line 282 "analizadorLexico.l"
 {
    return t_lt;
 }
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 288 "analizadorLexico.l"
+#line 285 "analizadorLexico.l"
 {
     return t_gt;
 }
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 291 "analizadorLexico.l"
+#line 288 "analizadorLexico.l"
 {
     return t_astk;
 }
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 294 "analizadorLexico.l"
+#line 291 "analizadorLexico.l"
 {
     return t_sumsum;
 }   
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 297 "analizadorLexico.l"
+#line 294 "analizadorLexico.l"
 {
     return t_sum;
 }
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 300 "analizadorLexico.l"
+#line 297 "analizadorLexico.l"
 {
     return t_subsub;
 }
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 303 "analizadorLexico.l"
+#line 300 "analizadorLexico.l"
 {
     return t_sub;
 }
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 306 "analizadorLexico.l"
+#line 303 "analizadorLexico.l"
 {
     return t_div;
 }
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 309 "analizadorLexico.l"
+#line 306 "analizadorLexico.l"
 {
     return t_mod;
 }
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 312 "analizadorLexico.l"
+#line 309 "analizadorLexico.l"
 {
     return t_ternario;
 }
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 315 "analizadorLexico.l"
+#line 312 "analizadorLexico.l"
 {
     return t_not;
 }
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 318 "analizadorLexico.l"
+#line 315 "analizadorLexico.l"
 {
     return t_oror;
 }
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 321 "analizadorLexico.l"
+#line 318 "analizadorLexico.l"
 {
     return t_andand;
 }
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 324 "analizadorLexico.l"
+#line 321 "analizadorLexico.l"
 {
     return t_bitor;
 }
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 327 "analizadorLexico.l"
+#line 324 "analizadorLexico.l"
 {
     return t_bitand;
 }
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 330 "analizadorLexico.l"
+#line 327 "analizadorLexico.l"
 {
     return t_bitxor;
 }
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 333 "analizadorLexico.l"
+#line 330 "analizadorLexico.l"
 {
     return t_colon;
 }
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 336 "analizadorLexico.l"
+#line 333 "analizadorLexico.l"
 {
     return t_comma;
 }
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 339 "analizadorLexico.l"
+#line 336 "analizadorLexico.l"
 {
     return t_dot;
 }
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 342 "analizadorLexico.l"
+#line 339 "analizadorLexico.l"
 {
     return t_opcrlyb;
 }
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
-#line 345 "analizadorLexico.l"
+#line 342 "analizadorLexico.l"
 {
     return t_clocrlyb;
 }
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
-#line 348 "analizadorLexico.l"
+#line 345 "analizadorLexico.l"
 ECHO;
 	YY_BREAK
-#line 1502 "analizadorLexico.cpp"
+#line 1499 "analizadorLexico.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2503,26 +2500,9 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 348 "analizadorLexico.l"
-
-/*void yyerror (std::string codigo_error) { 
-    std::cout<< " Parse Error : \n"<<codigo_error<<std::endl;
-}*/
-
+#line 345 "analizadorLexico.l"
 
 /*
-    DESCARTADO
-    METODO ATRIBUTO
-    {DOT}{ID} {
-    yylval.atributos = new cl_atributos_tokens;token_id++;
-    yylval.atributos->token_id = token_id;
-    yylval.atributos->line_number = line_number;
-
-    yylval.atributos->value_string = "";
-    for(int i = 1;i<yyleng; i++){
-        yylval.atributos->value_string+=yytext[i];
-    }
-    return t_metodo_atributo;
-}
-
+SUBRUTINAS DEL USUARIO
+DE MOMENTO, VACIAS
 */

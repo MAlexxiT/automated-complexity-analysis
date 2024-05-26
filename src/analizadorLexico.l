@@ -2,10 +2,9 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
-#include "nodos.h"
-#include "analizadorSintactico.hpp" // output of bison on example1 .y
+#include "nodos.hpp"
+#include "analizadorSintactico.hpp" 
 extern "C" int yywrap() { }
-//por si algun dia requiero volver a poner globales lol
 %}
 /*HARDCODED STUFF*/
 USINGNPSTD "using namespace std;"
@@ -94,7 +93,6 @@ ID [A-Za-z\_]+[0-9A-Za-z\_]*
         if(yytext[i]=='\n') break;
         yylval.atributos->value_string+=yytext[i];
     }
-    //#cout<<"t_include"<<endl;
     return t_include;    
 }
 {USINGNPSTD} {
@@ -174,7 +172,6 @@ ID [A-Za-z\_]+[0-9A-Za-z\_]*
     return t_umap;
 }
 {SET} {
-    //#std::cout<<"t_set"<<endl;
     return t_set;
 }
 {MULTISET} {
@@ -346,24 +343,7 @@ ID [A-Za-z\_]+[0-9A-Za-z\_]*
     return t_clocrlyb;
 }
 %%
-/*void yyerror (std::string codigo_error) { 
-    std::cout<< " Parse Error : \n"<<codigo_error<<std::endl;
-}*/
-
-
 /*
-    DESCARTADO
-    METODO ATRIBUTO
-    {DOT}{ID} {
-    yylval.atributos = new cl_atributos_tokens;token_id++;
-    yylval.atributos->token_id = token_id;
-    yylval.atributos->line_number = line_number;
-
-    yylval.atributos->value_string = "";
-    for(int i = 1;i<yyleng; i++){
-        yylval.atributos->value_string+=yytext[i];
-    }
-    return t_metodo_atributo;
-}
-
+SUBRUTINAS DEL USUARIO
+DE MOMENTO, VACIAS
 */

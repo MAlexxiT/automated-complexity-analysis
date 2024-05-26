@@ -1,5 +1,8 @@
-#include "bits/stdc++.h"
-#include "nodos.h"
+#include <map>
+#include <vector>
+#include <string>
+#include <iostream>
+#include "nodos.hpp"
 
 
 using namespace std;
@@ -56,22 +59,21 @@ private:
     map<int,map<string,int>> tasa_crecimiento_variable; 
     int anidamiento_actual;
     
-    void inicializador_complejidades_predefinidas();//[DONE]
-    cl_complejidad obtener_complejidad(cl_llamada_funcion* llamada);//[DONE]
+    void inicializador_complejidades_predefinidas();
+    cl_complejidad obtener_complejidad(cl_llamada_funcion* llamada);
     cl_complejidad obtener_complejidad(string identificador_funcion,string identificador,cl_tipoDato tipoContenedor);//[DONE]
-    cl_complejidad analizar(cl_if* actual);//[DONE]
-    cl_complejidad analizar(cl_ciclo* actual);//[DONE]
-    cl_complejidad analizar(cl_declaracion* actual);//[DONE]
-    cl_complejidad analizar(cl_expresion_booleana* actual);//[DONE]
-    cl_complejidad analizar(cl_expresion_aritmetica* actual);//[DONE]
-    cl_complejidad analizar_no_asignacion(cl_expresion_aritmetica* actual);//[DONE]
-    cl_complejidad analizar(cl_bloque_codigo* actual);//[DONE]
+    cl_complejidad analizar(cl_if* actual);
+    cl_complejidad analizar(cl_ciclo* actual);
+    cl_complejidad analizar(cl_declaracion* actual);
+    cl_complejidad analizar(cl_expresion_booleana* actual);
+    cl_complejidad analizar(cl_expresion_aritmetica* actual);
+    cl_complejidad analizar(cl_bloque_codigo* actual);
 public:
     //doesn´t make sense for it to be public, but fuck it
     string identificador_declaracion_funcion;
-    cl_analizador(vector<cl_declaracion_funcion*> orden_topologico);//[DONE]
-    cl_complejidad analizar(cl_declaracion_funcion* actual);  //[DONE]
-    cl_complejidad analizar_recursiva(cl_declaracion_funcion* actual);  //[DONE]
+    cl_analizador(vector<cl_declaracion_funcion*> orden_topologico);
+    cl_complejidad analizar(cl_declaracion_funcion* actual);  
+    cl_complejidad analizar_recursiva(cl_declaracion_funcion* actual);
 };
 
 
@@ -89,9 +91,6 @@ void analizador_complejidad(vector<cl_declaracion_funcion*> orden_topologico){
         if(declaracion->identificador == "main"){
             complejidad = complejidad + comp_funcion;
         }
-        
-        //#cout<<"OwO  "<<declaracion->identificador;
-        //#comp_funcion.imprimir_expresion();
     }   
 
     complejidad.imprimir_expresion();
@@ -126,20 +125,11 @@ cl_complejidad cl_analizador::analizar(cl_ciclo* actual){
 
     complejidad = complejidad + analizar(actual->bloque_codigo);
 
-    //TODO: Come up with a way to include early breaks that really changes the complexity
-    //maybe something with the form of (x%100) == 54
-    //#cout<<"CICLO"<<endl;
-    //#actual->argumento_continuacion->complejidad.imprimir_expresion();
-    //#complejidad.imprimir_expresion();
-
-
     complejidad = complejidad + analizar(actual->argumento_continuacion);
 
     complejidad = complejidad * actual->argumento_continuacion->complejidad;
     
     
-    
-    //#complejidad.imprimir_expresion();
     anidamiento_actual--;
     return complejidad;
 }           
@@ -154,64 +144,26 @@ cl_complejidad cl_analizador::analizar(cl_if* actual){
             retorno_pendientes = actual->argumento;
         }
     }
-
-    //
-    for(cl_if* ifactual: actual->bloque_if->ifs){
-        if(ifactual->tiene_break && actual->tiene_break == false){
-            actual->argumento = ifactual->argumento;
-            actual->tiene_break = true;
-        }
-        if(ifactual->tiene_break && actual->tiene_break){
-            if(ifactual->argumento->es_logaritmica){
-                actual->argumento = ifactual->argumento;
-            }
-        }
-    }
     
     if(actual->tiene_else){
         complejidad = complejidad + analizar(actual->bloque_else);
-        for(cl_if* ifactual: actual->bloque_else->ifs){
-            if(ifactual->tiene_break && actual->tiene_break == false){
-                actual->argumento = ifactual->argumento;
-                actual->tiene_break = true;
-            }
-            if(ifactual->tiene_break && actual->tiene_break){
-                if(ifactual->argumento->es_logaritmica){
-                    actual->argumento = ifactual->argumento;
-                }
-            }
-        }
     }
 
-    //#cout<<"IF-.---"<<endl;
-    //#complejidad.imprimir_expresion();
     return complejidad;
 }
 
 
-cl_complejidad analizar_no_asignacion(cl_expresion_aritmetica* actual){
-    cl_complejidad complejidad;
-    if(actual->es_terminal && actual->es_identificador){
-        complejidad = crea_o_lineal(actual->identificador);
-    }
-    if(actual->es_terminal== false && actual->operador == 1){
-        complejidad = actual->izquierda->complejidad*actual->derecha->complejidad;
-    }
-    return complejidad;
-}
+
 cl_complejidad cl_analizador::analizar(cl_expresion_aritmetica* actual){
     cl_complejidad complejidad;
-    //TODO: modificar para que no se intente calcular la complejidad de una funcion recursiva aqui
+
     if(actual->es_terminal && actual->es_llamada_funcion){
         if(actual->llamada_val->esta_contenida){
             complejidad = complejidad + obtener_complejidad(actual->llamada_val->identificador, actual->identificador,tipado_de_variable[actual->identificador]);
         }else{
-            //#cout<<actual->llamada_val->identificador;
             complejidad = complejidad + obtener_complejidad(actual->llamada_val);
 
-            //llamada recursiva
             if(identificador_declaracion_funcion == actual->llamada_val->identificador){
-                // ELIMINAR SI FALLA
                 //revisa la tasa de crecimiento entre llamadas recursivas
                 
                 int anidamiento_original = anidamiento_actual;
@@ -225,10 +177,8 @@ cl_complejidad cl_analizador::analizar(cl_expresion_aritmetica* actual){
                 int ind = 0;
                 cl_declaracion_funcion* decl_actual = definiciones[identificador_declaracion_funcion];
 
-                //#cout<<"TTT___TTTT"<<endl;
                 for(cl_expresion_aritmetica* argumento : actual->llamada_val->argumentos){
                     asignacion_por_llamada->izquierda->identificador = decl_actual->argumentos[ind].identificador;
-                    //#cout<<decl_actual->argumentos.size()<<decl_actual->argumentos[ind].identificador<<endl;
                     asignacion_por_llamada->derecha = argumento;
                     
                     analizar(asignacion_por_llamada);
@@ -238,7 +188,6 @@ cl_complejidad cl_analizador::analizar(cl_expresion_aritmetica* actual){
             }
             
         }
-
         
         if(actual->llamada_val->esta_contenida && modifica_tam_contenedor[actual->llamada_val->identificador]){
             tasa_crecimiento_variable[anidamiento_actual][actual->llamada_val->id_contenedor] = 1;
@@ -266,7 +215,6 @@ cl_complejidad cl_analizador::analizar(cl_expresion_aritmetica* actual){
         apariciones_en_aritmetica.clear();
         if(actual->derecha->es_terminal == true && actual->derecha->es_identificador == true){
             tasa_crecimiento_variable[anidamiento_actual][identificador] = tasa_crecimiento_variable[anidamiento_actual][actual->derecha->identificador]; 
-            //#cout<< identificador <<"^_^"<<endl;
         }
     }
     if(actual->operador ==2){
@@ -471,7 +419,7 @@ cl_complejidad cl_analizador::obtener_complejidad(cl_llamada_funcion* llamada){
 //todo porque el acceso con [] no es considerado una funcion lol
 cl_complejidad cl_analizador::obtener_complejidad(string identificador_funcion,string identificador,cl_tipoDato tipoContenedor){
     string contenedor = tipoContenedor.tipo;
-    //#cout<<contenedor<<" "<<identificador<<" ";
+
     cl_complejidad complejidad;
 
     complejidad = complejidad_funcion_contenida[contenedor][identificador_funcion];
@@ -486,15 +434,10 @@ cl_complejidad cl_analizador::obtener_complejidad(string identificador_funcion,s
         }
     }
 
-    //#complejidad.imprimir_expresion();
-
     return complejidad;
 }
 
 
-//ESTA TOMA LA COMPLEJIDAD DE UN BLOQUE ASUMIENDO QUE SOLO AGRUPA CODIGO
-//IMPLEMENTAR OTRA COSA PARA BLOQUES DE FORS Y FUNCIONES RECURSIVAS
-// LOOOLOLOLOL
 cl_complejidad cl_analizador::analizar(cl_bloque_codigo* actual){
     cl_complejidad complejidad;
     
@@ -640,8 +583,3 @@ void cl_analizador::inicializador_complejidades_predefinidas(){
     complejidad_funcion_contenida["int"]["[]"] = constante;
     complejidad_funcion_contenida["double"]["[]"] = constante;
 }   
-
-
-void pionero(){
-    cout<<":DDDDDDDD"<<endl;
-}

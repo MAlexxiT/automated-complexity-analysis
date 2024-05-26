@@ -68,7 +68,7 @@
 /* First part of user prologue.  */
 #line 1 "analizadorSintactico.y"
 
-#include "nodos.h"
+#include "nodos.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <string>
@@ -78,7 +78,7 @@
 
 cl_raiz* raiz;
 extern int yylex();
-void yyerror(const char *s) { printf("ERROR, FIX THIS SOMEHOW LOOOOL: %s \n", s); }
+void yyerror(const char *s) { printf("ERROR: %s \n", s); }
 
 
 #line 85 "analizadorSintactico.cpp"
@@ -223,7 +223,7 @@ union YYSTYPE
     cl_lista_argumentos *lista_argumentos; 
     cl_argumentos_llamada *argumentos_llamada;
     int es_exponencial;
-    //Si mal no recuerdo, tipos de datos no primitivos tienen que ser apuntadores, deal with it
+    //Tipos de datos no primitivos tienen que ser apuntadores, deal with it
     vector<cl_declaracion_funcion*>* funciones_declaradas;
     //1,2,3
     int es_conector;
@@ -614,17 +614,17 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    93,    93,   102,   103,   106,   107,   110,   113,   119,
-     120,   121,   122,   123,   124,   125,   126,   127,   128,   131,
-     137,   143,   149,   155,   161,   167,   172,   176,   183,   193,
-     194,   195,   196,   197,   200,   201,   204,   205,   206,   211,
-     214,   215,   216,   219,   225,   231,   237,   243,   249,   256,
-     262,   276,   288,   296,   305,   317,   325,   332,   338,   352,
-     362,   363,   364,   365,   366,   367,   371,   382,   389,   399,
-     406,   416,   428,   440,   441,   446,   452,   466,   471,   476,
-     481,   487,   492,   497,   501,   506,   510,   511,   512,   515,
-     516,   536,   539,   545,   546,   550,   555,   556,   560,   566,
-     579
+       0,    92,    92,   101,   102,   105,   106,   109,   112,   118,
+     119,   120,   121,   122,   123,   124,   125,   126,   127,   130,
+     136,   142,   148,   154,   160,   166,   171,   175,   182,   192,
+     193,   194,   195,   196,   199,   200,   203,   204,   205,   210,
+     213,   214,   215,   218,   224,   230,   236,   242,   248,   255,
+     261,   275,   287,   295,   304,   316,   324,   331,   337,   350,
+     359,   360,   361,   362,   363,   364,   367,   378,   385,   395,
+     402,   412,   424,   436,   437,   442,   448,   460,   465,   470,
+     475,   480,   485,   490,   494,   499,   503,   504,   505,   508,
+     509,   529,   532,   538,   539,   543,   548,   549,   553,   559,
+     572
 };
 #endif
 
@@ -1594,7 +1594,7 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 93 "analizadorSintactico.y"
+#line 92 "analizadorSintactico.y"
                                       {
             //#cout<<"PROGRAMA"<<endl;
             raiz = new cl_raiz;
@@ -1605,31 +1605,31 @@ yyreduce:
     break;
 
   case 3:
-#line 102 "analizadorSintactico.y"
+#line 101 "analizadorSintactico.y"
                             {(yyval.nada) = 0;}
 #line 1611 "analizadorSintactico.cpp"
     break;
 
   case 4:
-#line 103 "analizadorSintactico.y"
+#line 102 "analizadorSintactico.y"
                     {(yyval.nada) = 0;;}
 #line 1617 "analizadorSintactico.cpp"
     break;
 
   case 5:
-#line 106 "analizadorSintactico.y"
+#line 105 "analizadorSintactico.y"
                   {(yyval.nada) = 0;}
 #line 1623 "analizadorSintactico.cpp"
     break;
 
   case 6:
-#line 107 "analizadorSintactico.y"
+#line 106 "analizadorSintactico.y"
                            { (yyvsp[-1].nada) = 0;}
 #line 1629 "analizadorSintactico.cpp"
     break;
 
   case 7:
-#line 110 "analizadorSintactico.y"
+#line 109 "analizadorSintactico.y"
                   {
             (yyval.funciones_declaradas) = new vector<cl_declaracion_funcion*>;
         }
@@ -1637,7 +1637,7 @@ yyreduce:
     break;
 
   case 8:
-#line 113 "analizadorSintactico.y"
+#line 112 "analizadorSintactico.y"
                                                 {
             (yyvsp[-1].funciones_declaradas)->push_back((yyvsp[0].declaracion_funcion));
         }
@@ -1645,67 +1645,67 @@ yyreduce:
     break;
 
   case 9:
-#line 119 "analizadorSintactico.y"
+#line 118 "analizadorSintactico.y"
                 {(yyval.tipo_dato) = new cl_tipoDato;(yyval.tipo_dato)->tipo = "void";  }
 #line 1651 "analizadorSintactico.cpp"
     break;
 
   case 10:
-#line 120 "analizadorSintactico.y"
+#line 119 "analizadorSintactico.y"
                 {(yyval.tipo_dato) = new cl_tipoDato;(yyval.tipo_dato)->tipo = "bool";}
 #line 1657 "analizadorSintactico.cpp"
     break;
 
   case 11:
-#line 121 "analizadorSintactico.y"
+#line 120 "analizadorSintactico.y"
                 {(yyval.tipo_dato) = new cl_tipoDato;(yyval.tipo_dato)->tipo = "char";}
 #line 1663 "analizadorSintactico.cpp"
     break;
 
   case 12:
-#line 122 "analizadorSintactico.y"
+#line 121 "analizadorSintactico.y"
                  {(yyval.tipo_dato) = new cl_tipoDato;(yyval.tipo_dato)->tipo = "float";}
 #line 1669 "analizadorSintactico.cpp"
     break;
 
   case 13:
-#line 123 "analizadorSintactico.y"
+#line 122 "analizadorSintactico.y"
                        {(yyval.tipo_dato) = new cl_tipoDato;(yyval.tipo_dato)->tipo = "short int";}
 #line 1675 "analizadorSintactico.cpp"
     break;
 
   case 14:
-#line 124 "analizadorSintactico.y"
+#line 123 "analizadorSintactico.y"
                              {(yyval.tipo_dato) = new cl_tipoDato;(yyval.tipo_dato)->tipo = "long long int";}
 #line 1681 "analizadorSintactico.cpp"
     break;
 
   case 15:
-#line 125 "analizadorSintactico.y"
+#line 124 "analizadorSintactico.y"
                       {(yyval.tipo_dato) = new cl_tipoDato;(yyval.tipo_dato)->tipo = "long int";}
 #line 1687 "analizadorSintactico.cpp"
     break;
 
   case 16:
-#line 126 "analizadorSintactico.y"
+#line 125 "analizadorSintactico.y"
                {(yyval.tipo_dato) = new cl_tipoDato;(yyval.tipo_dato)->tipo = "int";}
 #line 1693 "analizadorSintactico.cpp"
     break;
 
   case 17:
-#line 127 "analizadorSintactico.y"
+#line 126 "analizadorSintactico.y"
                          {(yyval.tipo_dato) = new cl_tipoDato;(yyval.tipo_dato)->tipo = "double";}
 #line 1699 "analizadorSintactico.cpp"
     break;
 
   case 18:
-#line 128 "analizadorSintactico.y"
+#line 127 "analizadorSintactico.y"
                   {(yyval.tipo_dato) = new cl_tipoDato;(yyval.tipo_dato)->tipo = "double";}
 #line 1705 "analizadorSintactico.cpp"
     break;
 
   case 19:
-#line 131 "analizadorSintactico.y"
+#line 130 "analizadorSintactico.y"
                                          {
             (yyval.tipo_dato) = new cl_tipoDato;
             (yyval.tipo_dato)->tipo = "vector";
@@ -1716,7 +1716,7 @@ yyreduce:
     break;
 
   case 20:
-#line 137 "analizadorSintactico.y"
+#line 136 "analizadorSintactico.y"
                                        {
             (yyval.tipo_dato) = new cl_tipoDato;
             (yyval.tipo_dato)->tipo = "set";
@@ -1727,7 +1727,7 @@ yyreduce:
     break;
 
   case 21:
-#line 143 "analizadorSintactico.y"
+#line 142 "analizadorSintactico.y"
                                             {
             (yyval.tipo_dato) = new cl_tipoDato; 
             (yyval.tipo_dato)->tipo = "multiset"; 
@@ -1738,7 +1738,7 @@ yyreduce:
     break;
 
   case 22:
-#line 149 "analizadorSintactico.y"
+#line 148 "analizadorSintactico.y"
                                          {
             (yyval.tipo_dato) = new cl_tipoDato;
             (yyval.tipo_dato)->tipo = "queue";
@@ -1749,7 +1749,7 @@ yyreduce:
     break;
 
   case 23:
-#line 155 "analizadorSintactico.y"
+#line 154 "analizadorSintactico.y"
                                           {
             (yyval.tipo_dato) = new cl_tipoDato;
             (yyval.tipo_dato)->tipo = "pqueue";
@@ -1760,7 +1760,7 @@ yyreduce:
     break;
 
   case 24:
-#line 161 "analizadorSintactico.y"
+#line 160 "analizadorSintactico.y"
                                          {
             (yyval.tipo_dato) = new cl_tipoDato;
             (yyval.tipo_dato)->tipo = "stack";
@@ -1771,7 +1771,7 @@ yyreduce:
     break;
 
   case 25:
-#line 167 "analizadorSintactico.y"
+#line 166 "analizadorSintactico.y"
                                        {
             (yyval.tipo_dato) = new cl_tipoDato;
             (yyval.tipo_dato)->tipo = "bitset";
@@ -1781,7 +1781,7 @@ yyreduce:
     break;
 
   case 26:
-#line 172 "analizadorSintactico.y"
+#line 171 "analizadorSintactico.y"
                   {
             (yyval.tipo_dato) = new cl_tipoDato;
             (yyval.tipo_dato)->tipo = "string";
@@ -1790,7 +1790,7 @@ yyreduce:
     break;
 
   case 27:
-#line 176 "analizadorSintactico.y"
+#line 175 "analizadorSintactico.y"
                                                              {
             (yyval.tipo_dato) = new cl_tipoDato;
             (yyval.tipo_dato)->tipo = "map";
@@ -1802,7 +1802,7 @@ yyreduce:
     break;
 
   case 28:
-#line 183 "analizadorSintactico.y"
+#line 182 "analizadorSintactico.y"
                                                               {
             (yyval.tipo_dato) = new cl_tipoDato;
             (yyval.tipo_dato)->tipo = "umap";
@@ -1814,61 +1814,61 @@ yyreduce:
     break;
 
   case 29:
-#line 193 "analizadorSintactico.y"
+#line 192 "analizadorSintactico.y"
               {(yyval.es_exponencial)=0;}
 #line 1820 "analizadorSintactico.cpp"
     break;
 
   case 30:
-#line 194 "analizadorSintactico.y"
+#line 193 "analizadorSintactico.y"
                {(yyval.es_exponencial)=0;}
 #line 1826 "analizadorSintactico.cpp"
     break;
 
   case 31:
-#line 195 "analizadorSintactico.y"
+#line 194 "analizadorSintactico.y"
                {(yyval.es_exponencial) = 0;}
 #line 1832 "analizadorSintactico.cpp"
     break;
 
   case 32:
-#line 196 "analizadorSintactico.y"
+#line 195 "analizadorSintactico.y"
                {(yyval.es_exponencial)=1;}
 #line 1838 "analizadorSintactico.cpp"
     break;
 
   case 33:
-#line 197 "analizadorSintactico.y"
+#line 196 "analizadorSintactico.y"
                 {(yyval.es_exponencial)=1;}
 #line 1844 "analizadorSintactico.cpp"
     break;
 
   case 34:
-#line 200 "analizadorSintactico.y"
+#line 199 "analizadorSintactico.y"
             {(yyval.es_exponencial) = 4; }
 #line 1850 "analizadorSintactico.cpp"
     break;
 
   case 35:
-#line 201 "analizadorSintactico.y"
+#line 200 "analizadorSintactico.y"
                                   {(yyval.es_exponencial) = ((yyvsp[-1].es_exponencial)); (yyval.es_exponencial)+=2;}
 #line 1856 "analizadorSintactico.cpp"
     break;
 
   case 36:
-#line 204 "analizadorSintactico.y"
+#line 203 "analizadorSintactico.y"
                   {(yyval.argumentos_llamada) = new cl_argumentos_llamada;}
 #line 1862 "analizadorSintactico.cpp"
     break;
 
   case 37:
-#line 205 "analizadorSintactico.y"
+#line 204 "analizadorSintactico.y"
                             {(yyval.argumentos_llamada) = new cl_argumentos_llamada; (yyval.argumentos_llamada)->argumentos.push_back((yyvsp[0].expresion_aritmetica));}
 #line 1868 "analizadorSintactico.cpp"
     break;
 
   case 38:
-#line 206 "analizadorSintactico.y"
+#line 205 "analizadorSintactico.y"
                                                        {
             (yyvsp[-2].argumentos_llamada)->argumentos.push_back((yyvsp[0].expresion_aritmetica));
         }
@@ -1876,31 +1876,31 @@ yyreduce:
     break;
 
   case 39:
-#line 211 "analizadorSintactico.y"
+#line 210 "analizadorSintactico.y"
                                               { (yyval.nada) = 0;}
 #line 1882 "analizadorSintactico.cpp"
     break;
 
   case 40:
-#line 214 "analizadorSintactico.y"
+#line 213 "analizadorSintactico.y"
                   {}
 #line 1888 "analizadorSintactico.cpp"
     break;
 
   case 41:
-#line 215 "analizadorSintactico.y"
+#line 214 "analizadorSintactico.y"
                    {}
 #line 1894 "analizadorSintactico.cpp"
     break;
 
   case 42:
-#line 216 "analizadorSintactico.y"
+#line 215 "analizadorSintactico.y"
                                { }
 #line 1900 "analizadorSintactico.cpp"
     break;
 
   case 43:
-#line 219 "analizadorSintactico.y"
+#line 218 "analizadorSintactico.y"
                    {
             (yyval.expresion_aritmetica)= new cl_expresion_aritmetica;
             (yyval.expresion_aritmetica)->es_terminal = true;
@@ -1911,7 +1911,7 @@ yyreduce:
     break;
 
   case 44:
-#line 225 "analizadorSintactico.y"
+#line 224 "analizadorSintactico.y"
                 {
             (yyval.expresion_aritmetica)= new cl_expresion_aritmetica;
             (yyval.expresion_aritmetica)->es_terminal = true;
@@ -1922,7 +1922,7 @@ yyreduce:
     break;
 
   case 45:
-#line 231 "analizadorSintactico.y"
+#line 230 "analizadorSintactico.y"
                  {
             (yyval.expresion_aritmetica)= new cl_expresion_aritmetica;
             (yyval.expresion_aritmetica)->es_terminal = true;
@@ -1933,7 +1933,7 @@ yyreduce:
     break;
 
   case 46:
-#line 237 "analizadorSintactico.y"
+#line 236 "analizadorSintactico.y"
                        {
             (yyval.expresion_aritmetica)= new cl_expresion_aritmetica;
             (yyval.expresion_aritmetica)->es_terminal = true;
@@ -1944,7 +1944,7 @@ yyreduce:
     break;
 
   case 47:
-#line 243 "analizadorSintactico.y"
+#line 242 "analizadorSintactico.y"
                   {
             (yyval.expresion_aritmetica)= new cl_expresion_aritmetica;
             (yyval.expresion_aritmetica)->es_terminal = true;
@@ -1955,7 +1955,7 @@ yyreduce:
     break;
 
   case 48:
-#line 249 "analizadorSintactico.y"
+#line 248 "analizadorSintactico.y"
                     {
             (yyval.expresion_aritmetica)= new cl_expresion_aritmetica;
             (yyval.expresion_aritmetica)->es_terminal = true;
@@ -1967,7 +1967,7 @@ yyreduce:
     break;
 
   case 49:
-#line 256 "analizadorSintactico.y"
+#line 255 "analizadorSintactico.y"
                          {
             (yyval.expresion_aritmetica)= new cl_expresion_aritmetica; 
             (yyval.expresion_aritmetica)->es_terminal = true;  
@@ -1978,9 +1978,9 @@ yyreduce:
     break;
 
   case 50:
-#line 262 "analizadorSintactico.y"
+#line 261 "analizadorSintactico.y"
                                       {
-            //beginning of id related rules
+            //beginning of identifier related rules
             (yyval.expresion_aritmetica)= new cl_expresion_aritmetica;
             (yyval.expresion_aritmetica)->es_terminal = false;
             (yyval.expresion_aritmetica)->izquierda = (yyvsp[-1].expresion_aritmetica);
@@ -1997,7 +1997,7 @@ yyreduce:
     break;
 
   case 51:
-#line 276 "analizadorSintactico.y"
+#line 275 "analizadorSintactico.y"
                                       {
             (yyval.expresion_aritmetica)= new cl_expresion_aritmetica;
             (yyval.expresion_aritmetica)->es_terminal = false;
@@ -2014,7 +2014,7 @@ yyreduce:
     break;
 
   case 52:
-#line 288 "analizadorSintactico.y"
+#line 287 "analizadorSintactico.y"
                                                    {
             (yyval.expresion_aritmetica)= new cl_expresion_aritmetica;
             (yyval.expresion_aritmetica)->es_terminal = true;
@@ -2027,7 +2027,7 @@ yyreduce:
     break;
 
   case 53:
-#line 296 "analizadorSintactico.y"
+#line 295 "analizadorSintactico.y"
                                                                  {
             (yyval.expresion_aritmetica)= new cl_expresion_aritmetica;
             (yyval.expresion_aritmetica)->es_terminal = true;
@@ -2041,7 +2041,7 @@ yyreduce:
     break;
 
   case 54:
-#line 305 "analizadorSintactico.y"
+#line 304 "analizadorSintactico.y"
                                                       {
             //asume que la segunda expresion es una llamada
             (yyval.expresion_aritmetica)= new cl_expresion_aritmetica;
@@ -2058,7 +2058,7 @@ yyreduce:
     break;
 
   case 55:
-#line 317 "analizadorSintactico.y"
+#line 316 "analizadorSintactico.y"
                                                                     {
             (yyval.expresion_aritmetica)= new cl_expresion_aritmetica;
             (yyval.expresion_aritmetica)->identificador = (yyvsp[-2].expresion_aritmetica)->identificador;
@@ -2071,7 +2071,7 @@ yyreduce:
     break;
 
   case 56:
-#line 325 "analizadorSintactico.y"
+#line 324 "analizadorSintactico.y"
                                                                     {
             (yyval.expresion_aritmetica)= new cl_expresion_aritmetica; 
             (yyval.expresion_aritmetica)->es_terminal = false; 
@@ -2083,7 +2083,7 @@ yyreduce:
     break;
 
   case 57:
-#line 332 "analizadorSintactico.y"
+#line 331 "analizadorSintactico.y"
                                                 {
             (yyval.expresion_aritmetica)= (yyvsp[-1].expresion_aritmetica);
         }
@@ -2091,7 +2091,7 @@ yyreduce:
     break;
 
   case 58:
-#line 338 "analizadorSintactico.y"
+#line 337 "analizadorSintactico.y"
                                          {
             (yyval.declaracion) = new cl_declaracion;
             (yyval.declaracion)->tipo = (yyvsp[-1].tipo_dato);
@@ -2103,62 +2103,60 @@ yyreduce:
                 (yyval.declaracion)->identificador = (yyvsp[0].expresion_aritmetica)->izquierda->identificador;
                 (yyval.declaracion)->inicializada = true;
                 (yyval.declaracion)->valor_predeterminado = (yyvsp[0].expresion_aritmetica)->derecha;
-                //#cout<<"AAAAAA"<<$$->identificador<<endl;
             }
         }
-#line 2110 "analizadorSintactico.cpp"
+#line 2109 "analizadorSintactico.cpp"
     break;
 
   case 59:
-#line 352 "analizadorSintactico.y"
+#line 350 "analizadorSintactico.y"
                                            {
             //asume que expresionAritmetica es un identificador
             (yyval.declaracion) = new cl_declaracion;
             (yyval.declaracion)->tipo = (yyvsp[-1].tipo_dato);
             (yyval.declaracion)->identificador = (yyvsp[0].expresion_aritmetica)->identificador;
-            //cout<<"CONTENEDOR "<<$$->tipo->tipo<<" "<<$$->identificador<<endl; 
         }
-#line 2122 "analizadorSintactico.cpp"
+#line 2120 "analizadorSintactico.cpp"
     break;
 
   case 60:
-#line 362 "analizadorSintactico.y"
+#line 359 "analizadorSintactico.y"
                {(yyval.es_conector)=0;}
-#line 2128 "analizadorSintactico.cpp"
+#line 2126 "analizadorSintactico.cpp"
     break;
 
   case 61:
-#line 363 "analizadorSintactico.y"
+#line 360 "analizadorSintactico.y"
                 {(yyval.es_conector)=0;}
-#line 2134 "analizadorSintactico.cpp"
+#line 2132 "analizadorSintactico.cpp"
     break;
 
   case 62:
-#line 364 "analizadorSintactico.y"
+#line 361 "analizadorSintactico.y"
                 {(yyval.es_conector)=-1;}
-#line 2140 "analizadorSintactico.cpp"
+#line 2138 "analizadorSintactico.cpp"
     break;
 
   case 63:
-#line 365 "analizadorSintactico.y"
+#line 362 "analizadorSintactico.y"
                 {(yyval.es_conector)=1;}
-#line 2146 "analizadorSintactico.cpp"
+#line 2144 "analizadorSintactico.cpp"
     break;
 
   case 64:
-#line 366 "analizadorSintactico.y"
+#line 363 "analizadorSintactico.y"
                 {(yyval.es_conector)=-1;}
-#line 2152 "analizadorSintactico.cpp"
+#line 2150 "analizadorSintactico.cpp"
     break;
 
   case 65:
-#line 367 "analizadorSintactico.y"
+#line 364 "analizadorSintactico.y"
                 {(yyval.es_conector)=1;}
-#line 2158 "analizadorSintactico.cpp"
+#line 2156 "analizadorSintactico.cpp"
     break;
 
   case 66:
-#line 371 "analizadorSintactico.y"
+#line 367 "analizadorSintactico.y"
                                                                 {
             (yyval.expresion_booleana) = new cl_expresion_booleana;
             (yyval.expresion_booleana)->es_terminal = false;
@@ -2170,11 +2168,11 @@ yyreduce:
             (yyval.expresion_booleana)->derecha->es_terminal = true;
             (yyval.expresion_booleana)->derecha->valor = (yyvsp[0].expresion_aritmetica);
         }
-#line 2174 "analizadorSintactico.cpp"
+#line 2172 "analizadorSintactico.cpp"
     break;
 
   case 67:
-#line 382 "analizadorSintactico.y"
+#line 378 "analizadorSintactico.y"
                                                       {
             (yyval.expresion_booleana) = new cl_expresion_booleana;
             (yyval.expresion_booleana)->es_terminal = false;
@@ -2182,11 +2180,11 @@ yyreduce:
             (yyval.expresion_booleana)->izquierda = (yyvsp[-2].expresion_booleana);
             (yyval.expresion_booleana)->derecha = (yyvsp[0].expresion_booleana);
         }
-#line 2186 "analizadorSintactico.cpp"
+#line 2184 "analizadorSintactico.cpp"
     break;
 
   case 68:
-#line 389 "analizadorSintactico.y"
+#line 385 "analizadorSintactico.y"
                                                     {
             (yyval.expresion_booleana) = new cl_expresion_booleana;
             (yyval.expresion_booleana)->es_terminal = false;
@@ -2194,11 +2192,11 @@ yyreduce:
             (yyval.expresion_booleana)->izquierda = (yyvsp[-2].expresion_booleana);
             (yyval.expresion_booleana)->derecha = (yyvsp[0].expresion_booleana);
         }
-#line 2198 "analizadorSintactico.cpp"
+#line 2196 "analizadorSintactico.cpp"
     break;
 
   case 69:
-#line 399 "analizadorSintactico.y"
+#line 395 "analizadorSintactico.y"
                                                               {
             (yyval.iif) = new cl_if; 
             (yyval.iif)->argumento = (yyvsp[-2].expresion_booleana); 
@@ -2206,11 +2204,11 @@ yyreduce:
             (yyval.iif)->tiene_else = false;
             (yyval.iif)->tiene_break =  (yyvsp[0].bloque_codigo)->tiene_break;
         }
-#line 2210 "analizadorSintactico.cpp"
+#line 2208 "analizadorSintactico.cpp"
     break;
 
   case 70:
-#line 406 "analizadorSintactico.y"
+#line 402 "analizadorSintactico.y"
                                         {
             if((yyvsp[-2].iif)->tiene_else){
                 yyerror("Un if tiene mas de un else");
@@ -2219,11 +2217,11 @@ yyreduce:
             (yyvsp[-2].iif)->bloque_else = (yyvsp[0].bloque_codigo);
             (yyval.iif)->tiene_break =  (yyvsp[0].bloque_codigo)->tiene_break;
         }
-#line 2223 "analizadorSintactico.cpp"
+#line 2221 "analizadorSintactico.cpp"
     break;
 
   case 71:
-#line 417 "analizadorSintactico.y"
+#line 413 "analizadorSintactico.y"
         {
             (yyval.ciclo) = new cl_ciclo;
             (yyval.ciclo)->bloque_codigo = (yyvsp[0].bloque_codigo);
@@ -2233,11 +2231,11 @@ yyreduce:
             (yyval.ciclo)->bloque_codigo->aritmeticas.push_back((yyvsp[-2].expresion_aritmetica));
             delete (yyvsp[-6].declaracion);
         }
-#line 2237 "analizadorSintactico.cpp"
+#line 2235 "analizadorSintactico.cpp"
     break;
 
   case 72:
-#line 429 "analizadorSintactico.y"
+#line 425 "analizadorSintactico.y"
         {
             (yyval.ciclo) = new cl_ciclo;
             (yyval.ciclo)->bloque_codigo = (yyvsp[0].bloque_codigo);
@@ -2245,36 +2243,36 @@ yyreduce:
             (yyval.ciclo)->step = NULL;
             (yyval.ciclo)->bloque_codigo->booleanas.push_back((yyvsp[-2].expresion_booleana));
         }
-#line 2249 "analizadorSintactico.cpp"
+#line 2247 "analizadorSintactico.cpp"
     break;
 
   case 73:
-#line 440 "analizadorSintactico.y"
+#line 436 "analizadorSintactico.y"
                   {(yyval.lista_argumentos) = new cl_lista_argumentos;}
-#line 2255 "analizadorSintactico.cpp"
+#line 2253 "analizadorSintactico.cpp"
     break;
 
   case 74:
-#line 441 "analizadorSintactico.y"
+#line 437 "analizadorSintactico.y"
                              {
             (yyval.lista_argumentos) = new cl_lista_argumentos; 
             (yyval.lista_argumentos)->argumentos.push_back((*(yyvsp[0].declaracion)));
             delete (yyvsp[0].declaracion);
         }
-#line 2265 "analizadorSintactico.cpp"
+#line 2263 "analizadorSintactico.cpp"
     break;
 
   case 75:
-#line 446 "analizadorSintactico.y"
+#line 442 "analizadorSintactico.y"
                                                       {
             (yyvsp[-2].lista_argumentos)->argumentos.push_back((*(yyvsp[0].declaracion)));
             delete (yyvsp[0].declaracion);
         }
-#line 2274 "analizadorSintactico.cpp"
+#line 2272 "analizadorSintactico.cpp"
     break;
 
   case 76:
-#line 453 "analizadorSintactico.y"
+#line 449 "analizadorSintactico.y"
         {
             (yyval.declaracion_funcion) = new cl_declaracion_funcion;
             (yyval.declaracion_funcion)->argumentos = (yyvsp[-2].lista_argumentos)->argumentos;
@@ -2283,124 +2281,123 @@ yyreduce:
             (yyval.declaracion_funcion)->identificador = (yyvsp[-4].atributos)->value_string;
              delete (yyvsp[-2].lista_argumentos);
         }
-#line 2287 "analizadorSintactico.cpp"
+#line 2285 "analizadorSintactico.cpp"
     break;
 
   case 77:
-#line 466 "analizadorSintactico.y"
+#line 460 "analizadorSintactico.y"
                                         { 
             (yyval.bloque_codigo) = new cl_bloque_codigo;
             (yyval.bloque_codigo)->aritmeticas.push_back((yyvsp[-1].expresion_aritmetica));
             (yyval.bloque_codigo)->expresion_return = NULL;
         }
-#line 2297 "analizadorSintactico.cpp"
+#line 2295 "analizadorSintactico.cpp"
     break;
 
   case 78:
-#line 471 "analizadorSintactico.y"
+#line 465 "analizadorSintactico.y"
                                        {
             (yyval.bloque_codigo) = new cl_bloque_codigo;
             (yyval.bloque_codigo)-> booleanas.push_back((yyvsp[-1].expresion_booleana));
             (yyval.bloque_codigo)->expresion_return = NULL;
         }
-#line 2307 "analizadorSintactico.cpp"
+#line 2305 "analizadorSintactico.cpp"
     break;
 
   case 79:
-#line 476 "analizadorSintactico.y"
+#line 470 "analizadorSintactico.y"
                                    {
             (yyval.bloque_codigo) = new cl_bloque_codigo;
             (yyval.bloque_codigo)->aritmeticas.push_back((yyvsp[-1].expresion_aritmetica));
             (yyval.bloque_codigo)->expresion_return = NULL;
         }
-#line 2317 "analizadorSintactico.cpp"
+#line 2315 "analizadorSintactico.cpp"
     break;
 
   case 80:
-#line 481 "analizadorSintactico.y"
+#line 475 "analizadorSintactico.y"
                                         {
             (yyval.bloque_codigo) = new cl_bloque_codigo;
             (yyval.bloque_codigo)->declaraciones.push_back((yyvsp[-1].declaracion));
             (yyval.bloque_codigo)->expresion_return = NULL;
-            //cout<<$1->identificador<<"---->"<<$1->tipo->tipo<<endl;
         }
-#line 2328 "analizadorSintactico.cpp"
+#line 2325 "analizadorSintactico.cpp"
     break;
 
   case 81:
-#line 487 "analizadorSintactico.y"
+#line 480 "analizadorSintactico.y"
                                                    {
             (yyval.bloque_codigo) = new cl_bloque_codigo;
             (yyval.bloque_codigo)->expresion_return = (yyvsp[-1].expresion_aritmetica);
             (yyval.bloque_codigo)->aritmeticas.push_back((yyvsp[-1].expresion_aritmetica));
         }
-#line 2338 "analizadorSintactico.cpp"
+#line 2335 "analizadorSintactico.cpp"
     break;
 
   case 82:
-#line 492 "analizadorSintactico.y"
+#line 485 "analizadorSintactico.y"
                                                  {
             (yyval.bloque_codigo) = new cl_bloque_codigo;
             (yyval.bloque_codigo)-> booleanas.push_back((yyvsp[-1].expresion_booleana));
             (yyval.bloque_codigo)->expresion_return = NULL;
         }
-#line 2348 "analizadorSintactico.cpp"
+#line 2345 "analizadorSintactico.cpp"
     break;
 
   case 83:
-#line 497 "analizadorSintactico.y"
+#line 490 "analizadorSintactico.y"
                                 {
             (yyval.bloque_codigo) = new cl_bloque_codigo;
             (yyval.bloque_codigo)->expresion_return = NULL;
         }
-#line 2357 "analizadorSintactico.cpp"
+#line 2354 "analizadorSintactico.cpp"
     break;
 
   case 84:
-#line 501 "analizadorSintactico.y"
+#line 494 "analizadorSintactico.y"
                              { 
             (yyval.bloque_codigo) = new cl_bloque_codigo;
             (yyval.bloque_codigo)->tiene_break = true;
             (yyval.bloque_codigo)->expresion_return = NULL;
         }
-#line 2367 "analizadorSintactico.cpp"
+#line 2364 "analizadorSintactico.cpp"
     break;
 
   case 85:
-#line 506 "analizadorSintactico.y"
+#line 499 "analizadorSintactico.y"
                                 {
             (yyval.bloque_codigo) = new cl_bloque_codigo;
             (yyval.bloque_codigo)->expresion_return = NULL;
         }
-#line 2376 "analizadorSintactico.cpp"
+#line 2373 "analizadorSintactico.cpp"
     break;
 
   case 86:
-#line 510 "analizadorSintactico.y"
+#line 503 "analizadorSintactico.y"
                       {(yyval.bloque_codigo) = new cl_bloque_codigo; (yyval.bloque_codigo)->ciclos.push_back((yyvsp[0].ciclo));}
-#line 2382 "analizadorSintactico.cpp"
+#line 2379 "analizadorSintactico.cpp"
     break;
 
   case 87:
-#line 511 "analizadorSintactico.y"
+#line 504 "analizadorSintactico.y"
                        { (yyval.bloque_codigo) = new cl_bloque_codigo; (yyval.bloque_codigo)->ciclos.push_back((yyvsp[0].ciclo));}
-#line 2388 "analizadorSintactico.cpp"
+#line 2385 "analizadorSintactico.cpp"
     break;
 
   case 88:
-#line 512 "analizadorSintactico.y"
+#line 505 "analizadorSintactico.y"
                     { (yyval.bloque_codigo) = new cl_bloque_codigo; (yyval.bloque_codigo)->ifs.push_back((yyvsp[0].iif));}
-#line 2394 "analizadorSintactico.cpp"
+#line 2391 "analizadorSintactico.cpp"
     break;
 
   case 89:
-#line 515 "analizadorSintactico.y"
+#line 508 "analizadorSintactico.y"
                     {(yyval.bloque_codigo) = (yyvsp[0].bloque_codigo);}
-#line 2400 "analizadorSintactico.cpp"
+#line 2397 "analizadorSintactico.cpp"
     break;
 
   case 90:
-#line 516 "analizadorSintactico.y"
+#line 509 "analizadorSintactico.y"
                                    {
             for(int i = 0; i<((yyvsp[0].bloque_codigo))->aritmeticas.size(); i++){
                 (yyvsp[-1].bloque_codigo)->aritmeticas.push_back((yyvsp[0].bloque_codigo)->aritmeticas[i]);
@@ -2419,70 +2416,70 @@ yyreduce:
             }
             delete (yyvsp[0].bloque_codigo);
         }
-#line 2423 "analizadorSintactico.cpp"
+#line 2420 "analizadorSintactico.cpp"
     break;
 
   case 91:
-#line 536 "analizadorSintactico.y"
+#line 529 "analizadorSintactico.y"
                                            {
             (yyval.bloque_codigo) = (yyvsp[-1].bloque_codigo);
         }
-#line 2431 "analizadorSintactico.cpp"
+#line 2428 "analizadorSintactico.cpp"
     break;
 
   case 92:
-#line 539 "analizadorSintactico.y"
+#line 532 "analizadorSintactico.y"
                                {
             (yyval.bloque_codigo) = new cl_bloque_codigo;
         }
-#line 2439 "analizadorSintactico.cpp"
+#line 2436 "analizadorSintactico.cpp"
     break;
 
   case 93:
-#line 545 "analizadorSintactico.y"
+#line 538 "analizadorSintactico.y"
                   {(yyval.argumentos_llamada) = new cl_argumentos_llamada;}
-#line 2445 "analizadorSintactico.cpp"
+#line 2442 "analizadorSintactico.cpp"
     break;
 
   case 94:
-#line 547 "analizadorSintactico.y"
+#line 540 "analizadorSintactico.y"
         {
             (yyvsp[-3].argumentos_llamada)->argumentos.push_back((yyvsp[0].expresion_aritmetica));
         }
-#line 2453 "analizadorSintactico.cpp"
+#line 2450 "analizadorSintactico.cpp"
     break;
 
   case 95:
-#line 551 "analizadorSintactico.y"
+#line 544 "analizadorSintactico.y"
         {
         }
-#line 2460 "analizadorSintactico.cpp"
+#line 2457 "analizadorSintactico.cpp"
     break;
 
   case 96:
-#line 555 "analizadorSintactico.y"
+#line 548 "analizadorSintactico.y"
                   {(yyval.argumentos_llamada) = new cl_argumentos_llamada;}
-#line 2466 "analizadorSintactico.cpp"
+#line 2463 "analizadorSintactico.cpp"
     break;
 
   case 97:
-#line 557 "analizadorSintactico.y"
+#line 550 "analizadorSintactico.y"
         {
             (yyvsp[-3].argumentos_llamada)->argumentos.push_back((yyvsp[0].expresion_aritmetica));
         }
-#line 2474 "analizadorSintactico.cpp"
+#line 2471 "analizadorSintactico.cpp"
     break;
 
   case 98:
-#line 561 "analizadorSintactico.y"
+#line 554 "analizadorSintactico.y"
         {
 
         }
-#line 2482 "analizadorSintactico.cpp"
+#line 2479 "analizadorSintactico.cpp"
     break;
 
   case 99:
-#line 566 "analizadorSintactico.y"
+#line 559 "analizadorSintactico.y"
                     {
         (yyval.expresion_aritmetica)= new cl_expresion_aritmetica; 
         (yyval.expresion_aritmetica)->es_terminal = true; 
@@ -2496,11 +2493,11 @@ yyreduce:
         }
         delete (yyvsp[0].argumentos_llamada); 
     }
-#line 2500 "analizadorSintactico.cpp"
+#line 2497 "analizadorSintactico.cpp"
     break;
 
   case 100:
-#line 579 "analizadorSintactico.y"
+#line 572 "analizadorSintactico.y"
                      {
         (yyval.expresion_aritmetica)= new cl_expresion_aritmetica; 
         (yyval.expresion_aritmetica)->es_terminal = true; 
@@ -2513,11 +2510,11 @@ yyreduce:
         }
         delete (yyvsp[0].argumentos_llamada); 
     }
-#line 2517 "analizadorSintactico.cpp"
+#line 2514 "analizadorSintactico.cpp"
     break;
 
 
-#line 2521 "analizadorSintactico.cpp"
+#line 2518 "analizadorSintactico.cpp"
 
       default: break;
     }
@@ -2749,26 +2746,5 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 592 "analizadorSintactico.y"
+#line 585 "analizadorSintactico.y"
 
-/*
-[DONE]CHECAR SI LOS TOKENS GTEQ SON GENERADOS 
-AGREGAR CONTENEDORES DE CONTENEDORES
-AGREGAR LA CAPACIDAD DE CREAR CONSTANTES
-AGREGAR MAPAS CON KEY,VALUE DE CONTENEDORES
-[DONE]AGREGAR LA CAPACIDAD DE CREAR DECLASIGNACIONES
-[CUESTIONABLE]CREAR CUSTOM CLASS PARA DECLASIGNACION
-AGREGAR CAPACIDAD DE TOMAR VARIABLES GLOBALES
-[CUESTIONABLE]CAMBIAR LO DE LINE_NUMBER A $$->line_number = @1;
-AGREGAR ASIGNACION DEL TIPO int a,b,c,d;
-SOPORTAR MEZCLAS ENTRE EXPRESIONES ARITMETICAS Y BOOLEANAS
-[DONE]AGREGAR LA POSIBILIDAD DE QUE LLAMADAS A FUNCIONES SEAN PARTE DE EXPRESIONES
-QUITAR LA POSIBLIDAD DE TRATAR UNA CONSTANTE NUMERICA COMO VARIABLE EN EXPRESION, HACER MEDIANTE LA CREACIOB DE UNA NUEVA REGLA, CUIDAR LA AMBIGUEDAD PARA ESOS CASOS
-[DONE]LA IMPLEMENTACION ACTUAL DE ELSE PERMITE COSAS COMO IF(EXPR){}ELSE{}ELSE{}...ELSE{} CORREGIR
-AGREGAR LA POSIBILIDAD DE DEJAR ARGUMENTOS DE FOR EN BLANCO DENTRO DE LA GRAMATICA
-[DONE]VER COMO IMPLEMENTAR EARLY BREAKS EN IF/ELSE DENTRO DE CICLOS, POSIBLEMENTE AGREGAR SU CONDICION COMO UN ARGUMENTO DE TERMINACION OF SOME SORT
-[DONE]LA DESCRIPCION ACTUAL DE ARGUMENTOS DE CINCOUT PERMITE COSAS COMO COUT; CORREGIR SOMEHOW
-[DONE]AGREGAR LOS OPERADORES ++ Y -- LOL
-[DONE] AGREGAR LA CAPACIDAD DE CREAR BLOQUES DE CODIGO VACIOS
-[DONE] AGREGAR CAPACIDAD DE TENER ARREGLOS MULTIDIMENSIONALES
-*/

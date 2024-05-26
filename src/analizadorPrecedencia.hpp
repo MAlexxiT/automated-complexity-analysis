@@ -29,7 +29,6 @@ analizador_precedencia::analizador_precedencia(cl_raiz* raiz){
     id_disponible = 1;
     for(int i = 0; i<this->raiz->funciones_declaradas.size(); i++){
         direccion_de_llamada[this->raiz->funciones_declaradas[i]->identificador] = this->raiz->funciones_declaradas[i];
-        //std::cout<<this->raiz->funciones_declaradas[i]->identificador<<std::endl;
     }
     esta_predefinida["cin"] = true;
     esta_predefinida["cout"] = true;
@@ -179,7 +178,7 @@ void analizador_precedencia::dfs(cl_ciclo* actual){
         on_stack[actual->scc_id] = false;
     }
 }
-//CAMBIAR ESTO DESPUES DE MODIFICAR LA CLASE PARA QUE GUARDE LA EXPRESION A LA QUE SE INICIALIZA
+
 void analizador_precedencia::dfs(cl_declaracion* actual){
     actual->scc_id = id_disponible;
     actual->low_link_value = id_disponible;

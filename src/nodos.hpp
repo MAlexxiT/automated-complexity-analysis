@@ -18,14 +18,6 @@ class cl_llamada_funcion;
 class cl_tipoDato;
 class cl_bloque_codigo;
 
-//typedef std::vector<cl_declaracion*> lista_declaracion;
-//typedef std::vector<cl_modificacion*> lista_modificacion;
-//typedef std::vector<cl_expresion_booleana*> lista_expresion_booleana;
-//typedef std::vector<cl_expresion_aritmetica*> lista_expresion_aritmetica;
-//typedef std::vector<cl_ciclo*> lista_ciclo;
-//typedef std::vector<cl_declaracion_funcion*> lista_decla_funcion;
-//typedef std::vector<cl_llamada_funcion*> lista_llamada_funcion;
-//typedef std::vector<cl_dummy*> lista_dummy;
 
 class cl_atributos_tokens{
 public:
@@ -45,17 +37,6 @@ public:
     int scc_id;
 };
 
-
-
-    
-/*class cl_modificacion:public cl_nodo{
-public: 
-    string identificador;
-    //either primitive or the name of the container
-    string tipo;
-    //false by default, if false then its growth is linear
-    bool exponencial;
-};*/
 
 class cl_expresion_booleana{
 public: 
@@ -108,8 +89,6 @@ public:
 };
 
 
-//hereda de declaracion??
-
 
 class cl_llamada_funcion{
 public: 
@@ -119,9 +98,6 @@ public:
     string id_contenedor;
     vector<cl_expresion_aritmetica*> argumentos;
 };
-
-
-
 
 class cl_if{
 public:
@@ -134,6 +110,7 @@ public:
     int low_link_value;
     int scc_id;
 };
+
 class cl_ciclo{
 public: 
     cl_expresion_booleana* argumento_continuacion;
@@ -174,10 +151,12 @@ public:
     int low_link_value;
     int scc_id;
 };
+
 class cl_lista_argumentos{
 public:
     std::vector<cl_declaracion> argumentos;
 };
+
 class cl_declaracion_funcion{
 public: 
     string identificador;

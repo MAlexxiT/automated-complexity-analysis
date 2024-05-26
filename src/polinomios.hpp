@@ -74,7 +74,6 @@ public:
     cl_factor operator*(cl_factor otro){
         assert(("Dos factores que se multiplican deben de ser similares",this->multiplicables(otro)));
         
-        //cout<<this->identificador<<" * "<<otro.identificador<<endl;
         int tipo_resultante = max(this->obtenerTipo(), otro.obtenerTipo());
         int exponente_resultante =this->obtenerExponente()+otro.obtenerExponente(); 
         string nuevo_identificador = this->obtenerIdentificador();
@@ -120,15 +119,10 @@ public:
         bool encontrado;
         for(cl_factor fac_propio: factores){
             encontrado = false;
-            //cout<<fac_propio.identificador<<" ***";
             for(cl_factor& fac_otro: otro.factores){
                 if(fac_propio.multiplicables(fac_otro)){
                     resultado.factores.push_back(fac_propio*fac_otro);
                     
-                    //cout<<fac_otro.identificador<<endl;
-                    //cout<<fac_propio.obtenerExponente();
-                    //cout<<fac_otro.obtenerExponente();
-                    //cout<<resultado.factores.back().obtenerExponente()<<endl;
                     encontrado = true;
                     fac_otro.usado = true;
                     break;
@@ -136,7 +130,6 @@ public:
             }
             if(!encontrado){
                 resultado.factores.push_back(fac_propio);
-                //cout<<"__s__m__"<<endl;
             }
         }
         for(cl_factor& factor: otro.factores){
@@ -174,7 +167,6 @@ class cl_complejidad{
     void eliminar_terminos_semejantes(){
         vector<cl_sumando> copia_sumandos = sumandos;
         
-        //TODO: Revisar porque esta eliminando el factor logaritmico en marcosk.cpp
         for(int i = 1; i<copia_sumandos.size(); i++){
             for(int j = 0; j<i; j++){
                 if(copia_sumandos[i] == copia_sumandos[j]){
@@ -228,29 +220,9 @@ public:
         cl_complejidad respuesta;
         for(cl_sumando propio_sumando: sumandos){
             for(cl_sumando otro_sumando: otro.sumandos){
-                //cout<<"___-----_____----"<<endl;
                 respuesta.sumandos.push_back(propio_sumando*otro_sumando);
             }    
         }
-
-        //reduce terminos semejantes
-        /*vector<cl_sumando> copia_sumandos = respuesta.sumandos;
-        
-        //TODO: Revisar porque esta eliminando el factor logaritmico en marcosk.cpp
-        for(int i = 1; i<copia_sumandos.size(); i++){
-            for(int j = 0; j<i; j++){
-                if(copia_sumandos[i] == copia_sumandos[j]){
-                    copia_sumandos[j].duplicado = true;
-                }
-            }
-        }
-
-        respuesta.sumandos.clear();
-        for(cl_sumando s: copia_sumandos){
-            if(s.duplicado == false){
-                respuesta.sumandos.push_back(s);
-            }
-        }*/
 
         respuesta.eliminar_terminos_semejantes();
 
@@ -267,25 +239,6 @@ public:
             respuesta.sumandos.push_back(otro_sumando);
         }   
         
-        //reduce terminos semejantes
-        /*
-        vector<cl_sumando> copia_sumandos = respuesta.sumandos;
-
-        //TODO: Revisar porque esta eliminando el factor logaritmico en marcosk.cpp
-        for(int i = 1; i<copia_sumandos.size(); i++){
-            for(int j = 0; j<i; j++){
-                if(copia_sumandos[i] == copia_sumandos[j]){
-                    copia_sumandos[j].duplicado = true;
-                }
-            }
-        }
-
-        respuesta.sumandos.clear();
-        for(cl_sumando s: copia_sumandos){
-            if(s.duplicado == false){
-                respuesta.sumandos.push_back(s);
-            }
-        }*/
         respuesta.eliminar_terminos_semejantes();
 
         return respuesta;
@@ -294,7 +247,7 @@ public:
     void imprimir_expresion(){  
         bool primero = true;
         bool primer_factor;
-        //eliminar_terminos_semejantes();
+
         cout<<"O( ";
 
         for(cl_sumando sumando: sumandos){
@@ -326,8 +279,7 @@ public:
             }   
         }
 
-        cout<<" )";
-        //<<endl;
+        cout<<" )"<<endl;
     }
 };
 
