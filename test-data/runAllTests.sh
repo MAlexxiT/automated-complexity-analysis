@@ -7,7 +7,7 @@ for FILE in *; do
         line=$(head -n 1 $FILE)
         echo "----------------------------";
         echo $FILE;
-        ./analizadors<$FILE
+        ./analizadors $FILE
         echo " ";
         echo $line;
         
