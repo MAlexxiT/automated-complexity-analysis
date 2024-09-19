@@ -26,7 +26,7 @@ As a final note, if you need to recompile the .lex and .y files, you should ensu
 
 `lex -o analizadorLexico.cpp analizadorLexico.l` 
 
-`g++ -o analizador analizadorSintactico.cpp analizadorLexico.cpp` 
+`g++ -o analizador analizadorSintactico.cpp analizadorLexico.cpp analizadorComplejidad.cpp main.cpp` 
 
 
 ## Which kind of programs can the tool analyze?
